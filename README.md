@@ -16,6 +16,13 @@ nitrosf2 [options] <archive.sdat | image.nds> [...]
   --seed N       the driver's initial random state (default 0x12345678)
   --var N=V      set variable N (0-15 player, 16-31 global) to V before each
                  sequence starts; repeat for more variables
+  --dse-model earlier|later
+                 convert DSE songs and sound effects on the model of Explorers
+                 of Time (earlier) or Explorers of Sky (later) where no model
+                 covers the game's driver build; the result only approximates
+                 the game. DSE files of version 0x402, and packs compressed
+                 other than with LZ77 or in GFSA archives, aren't found, and
+                 give no warning
   --list         list sequences without converting
   --quiet        print errors only
   --version      show the version
@@ -42,8 +49,40 @@ Nearly every DS game plays its music through the sound archives (SDAT) and the s
 nitrosf2 converts every sequence of such an archive, the sequences of its sequence archives included.
 
 nitrosf2 also converts the songs and sound effects of Digital Sound Elements (DSE), Procyon Studio's sound driver.
-Pokémon Mystery Dungeon: Explorers of Time, Explorers of Darkness and Explorers of Sky use it. A sound effect is named
-after its file and its slot, such as `se_sys_005`.
+These games use builds of it that nitrosf2 models:
+
+- Pokémon Mystery Dungeon: Explorers of Time, Explorers of Darkness and Explorers of Sky
+- Professor Layton and the Diabolical Box, Professor Layton and the Unwound Future, and Professor Layton and the Last
+  Specter, with its London Life
+- Soma Bringer (Japan)
+- Luminous Arc 2, and Luminous Arc 3: Eyes (Japan)
+- Inazuma Eleven, Inazuma Eleven 2: Kyoui no Shinryakusha Fire, and Inazuma Eleven 3: Sekai e no Chousen!! Bomber
+  and The Ogre (Japan)
+- Fushigi no Dungeon: Fuurai no Shiren DS 2: Sabaku no Majou, Fuurai no Shiren 4: Kami no Hitomi to Akuma no Heso,
+  and Fuurai no Shiren 5: Fortune Tower to Unmei no Dice (Japan)
+- Ni no Kuni: Shikkoku no Madoushi (Japan)
+
+DSE's driver steps its songs on a timer that the game sets. Most games set 10 ms. The main game of Professor Layton
+and the Last Specter steps once a video frame, every 16.715 ms, and its London Life every 10 ms. nitrosf2 plays each
+song at its game's rate.
+
+Ni no Kuni holds six sequenced pieces that the game never plays: no code in it loads a song. Its music is streamed
+recordings, which nitrosf2 doesn't convert. The six pieces convert on the driver of Inazuma Eleven 3, whose code the
+game shares.
+
+A sound effect is named after its file and its slot, such as `se_sys_005`. Apart from the Explorers games, most of
+these games keep their sound effects in a layout of bank that nitrosf2 doesn't read yet. nitrosf2 then converts their
+songs only, and gives a warning for each such bank.
+
+Where two DSE banks of one folder share an id, the SFZ files name their samples after the banks' files. The samples of
+the two banks then stay apart in `sfz/samples/`.
+
+Other games use other builds of DSE's driver, and nitrosf2 has no model of those yet. It finds their songs and sound
+effects, in the file system or inside the games' packs, but converts them only when you ask for it with `--dse-model`.
+They then play on the model of one of the Explorers games, and the result only approximates what the game plays. Without
+the option, `--list` doesn't show them, and a warning gives their count. nitrosf2 doesn't find DSE files of version
+0x402, or songs in packs compressed other than with the SDK's LZ77 or in Level-5's GFSA archives. Such an image gives no
+warning about them.
 
 nitrosf2 converts the songs of Universomo's tracker driver too. Beat City uses it. Its 147 songs go in the folder
 `universomo`, each named after its song file, such as `au81`. Songs 81 to 146 are the music, and the rest are sound
@@ -97,6 +136,9 @@ sin/cos law of MIDI RP-036, and CC11 and the zones hold the level that the DS's 
 
 A sequence that loops plays its main loop once by default, with loop markers for players that loop on them. A sound
 that holds a note for ever ends 10 s after it settles.
+
+A sequence that the game's sound archive gives a volume of 0 converts silent, because the game plays it silent too.
+The report says so for each such sequence.
 
 ### Universomo's songs
 

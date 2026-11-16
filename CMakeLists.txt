@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.20)
 # nitrosf2 --version reports this version. The file properties of the Windows program and the Info.plist of the macOS
 # app show it too.
-project(nitrosf2 VERSION 0.1.0 LANGUAGES CXX)
+project(nitrosf2 VERSION 0.2.0 LANGUAGES CXX)
 
 # The submodules: seqlib writes the MIDI, SoundFont and SFZ files. ntdlib holds the conversion of the DS's sound
 # archives (ntdlib::sequence_export_ntr) and of Procyon Studio's driver (ntdlib::sequence_export_dse), the games'
