@@ -6,7 +6,7 @@ nitrosf2 is under the MIT licence (`LICENSE`). The libraries it builds on are un
 |---|---|---|
 | seqlib, Copyright (c) 2026 the seqlib authors | MIT (`externals/seqlib/LICENSE`) | In `externals/seqlib`, a submodule, compiled into nitrosf2: the MIDI, SoundFont 2 and SFZ files and their samples. |
 | xsflib, Copyright (c) 2026 the xsflib authors | MIT (`externals/xsflib/LICENSE`) | In `externals/xsflib`, a submodule, compiled into nitrosf2: bounds-checked reads in either byte order, file input and output with UTF-8 paths, the printable form of names, the console's UTF-8 arguments and output, the Windows version resource and the macOS app's droplet script. |
-| ntdlib, Copyright (c) 2026 the ntdlib authors | MIT (`externals/ntdlib/LICENSE`) | In `externals/ntdlib`, a submodule, compiled into nitrosf2: the readers of DS cartridge images, sound archives, Procyon Studio's sound files and Universomo's song files, the models of the DS's sound drivers and sound unit, the conversion to MIDI, SoundFont 2 and SFZ, the games' profiles, and the command line's options, help and messages. |
+| ntdlib, Copyright (c) 2026 the ntdlib authors | MIT (`externals/ntdlib/LICENSE`) | In `externals/ntdlib`, a submodule, compiled into nitrosf2: the readers of DS cartridge images, sound archives, Procyon Studio's sound files, Universomo's song files and Nintendo SPD's sound data, the models of the DS's sound drivers and sound unit, the conversion to MIDI, SoundFont 2 and SFZ, the games' profiles, and the command line's options, help and messages. |
 
 Binary distributions must include the MIT notices of nitrosf2, seqlib, xsflib and ntdlib. Shipping `LICENSE` and this
 file does that. The licence texts follow.
@@ -15,8 +15,9 @@ file does that. The licence texts follow.
 
 Nothing in nitrosf2 licenses game data. The sound files that nitrosf2 reads belong to their copyright holders.
 
-ntdlib's DS code holds numeric tables of the console's sound drivers, such as the pitch and volume tables of the SDK's
-driver and the tables of Procyon Studio's driver. The models use the exact values to reproduce the console's output.
+ntdlib's DS code contains numeric tables of the console's sound drivers, such as the pitch and volume tables of the
+SDK's driver and the tables of Procyon Studio's driver. The models use the exact values to reproduce the console's
+output.
 
 ## Licence texts
 

@@ -7,9 +7,10 @@
 // Output goes beside each input. Windows accepts files dropped on the executable. macOS uses Nitrosf2.app.
 //
 // ntdlib's DS frame (ntdlib/sequence_export/ntr/archive_input.h) reads the inputs and the options. A cartridge image
-// gives each sound archive (SDAT) that a file of its file system holds, each folder of Procyon Studio's songs and sound
-// effects (DSE), and each folder of Universomo's songs (.ums). The games' profiles
-// (ntdlib/sequence_export/ntr/game_profiles.h) give what each game's code sets before a sequence starts.
+// gives each sound archive (SDAT) that a file of its file system contains, each folder of Procyon Studio's songs and
+// sound effects (DSE), each folder of Universomo's songs (.ums), and the sounds of Nintendo SPD's driver
+// (sounddata.bin). The games' profiles (ntdlib/sequence_export/ntr/game_profiles.h) give what each game's code sets
+// before a sequence starts.
 
 #include "ntdlib/sequence_export/ntr/archive_input.h"
 #include "ntdlib/sequence_export/ntr/game_profiles.h"
